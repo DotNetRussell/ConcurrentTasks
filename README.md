@@ -10,23 +10,24 @@ TaskTwo Complete
 TaskThree Complete
 TaskFour Complete
 TaskFive Complete
-All Awaits Test Completed: 5128
+All Awaits Test Completed: 5133
 
 Executes each async request concurrently
 Starting Task When All Tests
 TaskOne Complete
-TaskTwo Complete
 TaskThree Complete
+TaskTwo Complete
 TaskFive Complete
 TaskFour Complete
-Task When All Test Completed: 1990
+Task When All Test Completed: 1995
 
 Executes each async request concurrently but doesn't wait for them to finish before continuing
 Starting Parallel Tasks Tests
-TaskThree Complete
-TaskOne Complete
+TaskFive Complete
 TaskFour Complete
+TaskThree Complete
 TaskTwo Complete
-Task Parallel Tasks Test Completed: 1031
+Task Parallel Tasks Test Completed: 1026
+TaskOne Complete
 
 ```
