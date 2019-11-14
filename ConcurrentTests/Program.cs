@@ -21,10 +21,15 @@ namespace ConcurrentTests
 
             public async void RunTests()
             {
+                Console.WriteLine("Executes each async request in order");
                 await AllAwaits();
                 Console.WriteLine();
+
+                Console.WriteLine("Executes each async request concurrently");
                 await TaskWhenAll();
                 Console.WriteLine();
+
+                Console.WriteLine("Executes each async request concurrently but doesn't wait for them to finish before continuing");
                 await ParallelTasks();
             }
 
@@ -45,15 +50,15 @@ namespace ConcurrentTests
             {
                 Console.WriteLine("Starting Task When All Tests");
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                List<Func<Task>> tasks = new List<Func<Task>>()
+                List<Task> tasks = new List<Task>()
                 {
-                    TaskOne,
-                    TaskTwo,
-                    TaskThree,
-                    TaskFour,
-                    TaskFive
+                    TaskOne(),
+                    TaskTwo(),
+                    TaskThree(),
+                    TaskFour(),
+                    TaskFive()
                 };
-                await Task.WhenAll(tasks.Select(async (task)=>await task()));
+                await Task.WhenAll(tasks);
                 stopwatch.Stop();
                 Console.WriteLine("Task When All Test Completed: " + stopwatch.ElapsedMilliseconds);
             }
@@ -79,28 +84,43 @@ namespace ConcurrentTests
 
             private async Task TaskOne()
             {
-                Thread.Sleep(1000);
-                await Task.Run(()=>Console.WriteLine("TaskOne Complete"));
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("TaskOne Complete");
+                });
             }
             private async Task TaskTwo()
             {
-                Thread.Sleep(1000);
-                await Task.Run(() => Console.WriteLine("TaskTwo Complete"));
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("TaskTwo Complete");
+                });
             }
             private async Task TaskThree()
             {
-                Thread.Sleep(1000);
-                await Task.Run(() => Console.WriteLine("TaskThree Complete"));
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("TaskThree Complete");
+                });
             }
             private async Task TaskFour()
             {
-                Thread.Sleep(1000);
-                await Task.Run(() => Console.WriteLine("TaskFour Complete"));
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("TaskFour Complete");
+                });
             }
             private async Task TaskFive()
             {
-                Thread.Sleep(1000);
-                await Task.Run(() => Console.WriteLine("TaskFive Complete"));
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("TaskFive Complete");
+                });
             }
         }
     }
